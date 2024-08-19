@@ -72,5 +72,4 @@ for ii in range(500):
 
 # 输出训练后的参数w和b
 print('w: ', w.item(), 'b: ', b.item())
-# test
-#test
+
