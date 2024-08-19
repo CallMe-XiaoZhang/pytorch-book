@@ -473,12 +473,13 @@ PyThon中常用的选择函数如表3-3所示。
 
 :常用的选择函数
 
-|函数|功能|
-|:---:|:---:|
-|`index_select(input, dim, index)`|在指定维度dim上选取，比如选取某些行、某些列|
-|`masked_select(input, mask)`|例子如上，a[a>0]，使用BoolTensor进行选取|
-|`non_zero(input)`|非0元素的下标|
-|`gather(input, dim, index)`|根据index，在dim维度上选取数据，输出的size与index一样|
+|                函数                 |                 功能                  |
+|:---------------------------------:|:-----------------------------------:|
+| `index_select(input, dim, index)` |       在指定维度dim上选取，比如选取某些行、某些列       |
+|   `masked_select(input, mask)`    |    例子如上，a[a>0]，使用BoolTensor进行选取     |
+|         `non_zero(input)`         |               非0元素的下标               |
+|    `gather(input, dim, index)`    | 根据index，在dim维度上选取数据，输出的size与index一样 |
+|  `scater(input, dim, index,src)`  |    根据index与src，在dim维度上修改input数据     |
 
 其中，`gather`是一个比较复杂的操作，对一个二维的Tensor，每个位置的元素输出如下：
 
