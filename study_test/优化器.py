@@ -34,6 +34,7 @@ criterion = nn.MSELoss()
 # 生成输入数据和目标标签
 input = t.randn(32, 3)  # 输入32个样本，3特征
 target = t.randn(32, 1)  # 目标32个样本，1特征，与输出维度一致
+
 # 前向传播
 output = net(input)
 # 计算损失
@@ -59,16 +60,21 @@ print(optimizer)
 # 为选定层设定不同学习率，选定第一层
 
 # special_layers 是一个 ModuleList，它包含了 net.layer1，此时第一层被选中
-special_layers = nn.ModuleList([net.layer1])
+special_layers = nn.ModuleList([net.layer1])# 可以视为第一层全连接被选中存放为special_layers
 
 # special_layers.parameters() 返回 special_layers 中所有参数的迭代器。
 # map(id, special_layers.parameters()) 会获取这些参数的内存地址（或标识符，ID）。
 # special_layers_params 是一个包含 special_layers 中参数 ID 的列表。
 special_layers_params = list(map(id, special_layers.parameters()))# 由ID可确认special_layers参数
+
 # base_params包含网络中所有不在 special_layers_params 列表中的参数
 base_params = [param for param in net.parameters() if id(param) not in special_layers_params]
+
+# 设置优化器为两部分，一部分为选定参数内容，另一部分为剩余参数内容
 optimizer = t.optim.SGD([
             {'params': base_params},
             {'params': special_layers.parameters(), 'lr': 0.01} # 选定参数学习率调整为0.01
         ], lr=0.001 )
 print(optimizer)
+
+
